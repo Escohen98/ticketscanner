@@ -2,7 +2,7 @@
   "use strict";
 
   window.addEventListener("load", initialize);
-  const CODE_LENGTH = 4;
+  const CODE_LENGTH = 4; //max code length.
   let codes = []; //An array containing codes already used. Only for testing purposes.
 
   //Adds event listeners to specified buttons.
