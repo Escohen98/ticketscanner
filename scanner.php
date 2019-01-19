@@ -27,8 +27,9 @@ function get_codes($count) {
   $db = get_PDO();
   if($count > 0 && count <= 10000) {
     $query = "SELECT code FROM Tickets WHERE active=FALSE LIMIT '$count'";
-    $query2 = "UPDATE Tickets SET active=TRUE WHERE active=FALSE LIMIT '$count'";
-    $tickets = sql_query($db, $query);
+    $codes = implode(', ' sql_query($db, $query));
+    //$query2 = "UPDATE Tickets SET active=TRUE WHERE active=FALSE LIMIT '$count'";
+    $query2 = "UPDATE Tickets set active=TRUE WHERE code in ($codes)";
     sql_query($db, $query2);
   } else {
     handle_error("Invalid number, {$count} ")
