@@ -28,6 +28,8 @@ function get_codes($count) {
   if($count > 0 && count <= 10000) {
     $query = "SELECT code FROM Tickets WHERE active=FALSE LIMIT '$count'";
     $query2 = "UPDATE Tickets SET active=TRUE WHERE active=FALSE LIMIT '$count'";
+    $tickets = sql_query($db, $query);
+    sql_query($db, $query2);
   } else {
     handle_error("Invalid number, {$count} ")
   }
