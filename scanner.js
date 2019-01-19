@@ -18,28 +18,53 @@
     $("enter").addEventListener("click", fetchData);
   }
 
-  //Adds given number (0-9) to the code string while the length <= CODE_LENGTH
-  function addChar() {
+  function fetchData() {
     updateBtnColor();
     let code = $("code").innerText;
-    console.log("Code length: " + code.length);
-    if(code.length < CODE_LENGTH)
-      $("code").innerText += this.innerText;
-  }
-
-  //Removes the last character in the code string from the code.
-  function delChar() {
-    updateBtnColor();
-    let code = $("code").innerText;
-    if(code.length != 0) {
-      $("code").innerText = code.substring(0, code.length-2);
+    let test = Math.round(Math.random());
+    if(test==0) {
+      displayResult(true);
+    } else {
+      displayResult(false);
     }
   }
 
-  function fetchData() {
-    updateBtnColor();
-    $("code").innerText = "";
-  }
+    //Displaus success message after code a validated as active and exists in
+    //database (if result == true) otherwise displays error message
+    function displayResult(result) {
+      let element = "error";
+      let file = "bad-beep.wav";
+      if(result) {
+        element = "success"
+        file = "success.wav"
+      }
+      let timer = null;
+      timer = setTimeout(function() {
+        let audio = new Audio(`./audio/${file}`);
+        audio.play();
+        $(element).classList.remove("hidden");
+      }, 500);
+        $(element).classList.add("hidden");
+        console.log(element + ": " + $(element).classList);
+        $("code").innerText = "";
+    }
+
+    //Adds given number (0-9) to the code string while the length <= CODE_LENGTH
+    function addChar() {
+      updateBtnColor();
+      let code = $("code").innerText;
+      if(code.length < CODE_LENGTH)
+        $("code").innerText += this.innerText;
+    }
+
+    //Removes the last character in the code string from the code.
+    function delChar() {
+      updateBtnColor();
+      let code = $("code").innerText;
+      if(code.length != 0) {
+        $("code").innerText = code.substring(0, code.length-2);
+      }
+    }
 
   //Adds mousedown and mouseup events to given button to change the color
   //when pressed.
@@ -63,7 +88,7 @@
   //Redundant but necessary.
   function updateBtnColor() {
     let btns = qsa("button");
-    for(int i = 0; i<btns.lenght; i++) {
+    for(let i = 0; i<btns.lenght; i++) {
       if(btns[i].style.backgroundColor == "blue" ) {
         btns[i].style.backgroundColor = "#DBDBDB";
       }
