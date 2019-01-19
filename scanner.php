@@ -4,11 +4,13 @@ include("common.php");
 if(isset($_POST["code"])) {
   echo json_encode(inactivate($_POST["code"])));
 
-} else {
+} else if(isset($_POST["pull"])) {
+  echo json_encode(get_codes($_POST["pull"]));
+}else {
   missing_param_msg(["code"]);
 }
 
-//Checks if the givewn $code is active. 
+//Checks if the givewn $code is active.
 function inactivate($code) {
   $db = get_PDO();
   if(get_exists($db, $code)) {
@@ -17,6 +19,17 @@ function inactivate($code) {
     return ["exists" => true];
   } else {
     return ["exists" => false];
+  }
+}
+
+//Pulls $count amount of codes and sets them to active.
+function get_codes($count) {
+  $db = get_PDO();
+  if($count > 0 && count <= 10000) {
+    $query = "SELECT code FROM Tickets WHERE active=FALSE LIMIT '$count'";
+    $query2 = "UPDATE Tickets SET active=TRUE WHERE active=FALSE LIMIT '$count'";
+  } else {
+    handle_error("Invalid number, {$count} ")
   }
 }
 
