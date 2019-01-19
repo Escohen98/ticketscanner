@@ -22,36 +22,45 @@
     updateBtnColor();
     let code = $("code").innerText;
     let test = Math.round(Math.random());
-    if(test==0) {
-      displayResult(true);
-    } else {
-      displayResult(false);
+    if(code.length == 4) {
+      if(test==0) {
+        displayResult(true);
+      } else {
+        displayResult(false);
+      }
     }
   }
 
-    //Displaus success message after code a validated as active and exists in
-    //database (if result == true) otherwise displays error message
+    // Displays success image for 1/2 a second and plays a success sound
+    // after code is validated as
+    // active and exists in database (if result == true) otherwise displays
+    // error image and plays fail sound.
     function displayResult(result) {
       let element = "error";
       let file = "bad-beep.wav";
+      document.body.style.backgroundColor = "red";
       if(result) {
-        element = "success"
-        file = "success.wav"
+        element = "success";
+        file = "success.wav";
+        document.body.style.backgroundColor = "green";
       }
       let timer = null;
       timer = setTimeout(function() {
-        let audio = new Audio(`./audio/${file}`);
-        audio.play();
-        $(element).classList.remove("hidden");
-      }, 500);
-        $(element).classList.add("hidden");
         console.log(element + ": " + $(element).classList);
         $("code").innerText = "";
+      }, 1000);
+
+      let audio = new Audio(`./audio/${file}`);
+      audio.play();
+      $(element).classList.remove("hidden");
     }
 
     //Adds given number (0-9) to the code string while the length <= CODE_LENGTH
     function addChar() {
       updateBtnColor();
+      $("success").classList.add("hidden");
+      $("error").classList.add("hidden");
+      document.body.style.backgroundColor = "white";
       let code = $("code").innerText;
       if(code.length < CODE_LENGTH)
         $("code").innerText += this.innerText;
@@ -61,16 +70,21 @@
     function delChar() {
       updateBtnColor();
       let code = $("code").innerText;
+      console.log(`|${code}|`);
       if(code.length != 0) {
-        $("code").innerText = code.substring(0, code.length-2);
+        $("code").innerText = code.substring(0, code.length-1);
+        code = $("code").innerText;
       }
+      console.log(`|${code}|`);
     }
 
   //Adds mousedown and mouseup events to given button to change the color
   //when pressed.
   function addColorChange(btn) {
-    btn.addEventListener("mousedown", changeColor);
-    btn.addEventListener("mouseup", changeColor);
+    btn.addEventListener("mousedown", function() {this.style.backgroundColor =
+                                                  "blue";});
+    btn.addEventListener("mouseup", function() {this.style.backgroundColor =
+                                                "#DBDBDB";});
   }
 
   //Changes the color of the element that called on the function to
@@ -79,7 +93,7 @@
     if(this.style.backgroundColor == "blue" ) {
       this.style.backgroundColor = "#DBDBDB";
     } else {
-      this.style.backgroundColor = "blue"
+      this.style.backgroundColor = "blue";
     }
 
   }

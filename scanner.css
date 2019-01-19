@@ -1,9 +1,9 @@
-body, #code-validator {
+body, #code-validator, #code {
   display: flex;
   justify-content: center;
 }
 
-body {
+body, #code {
   align-items: center;
 }
 
@@ -28,6 +28,8 @@ button {
   border-style: solid;
   border-color: black;
   border-width: 1px;
+  font-size: 20px;
+  background-color: white;
 }
 
 #reply > img {
