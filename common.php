@@ -25,25 +25,26 @@
    * a PDOException if an error occurs when connecting to database.
    * @return {PDO}
    */
-  function get_PDO() {
-    # Variables for connections to the database.
-    $host =  "localhost";
-    $port = "8"; # Make sure this matches your server (e.g. MAMP) port
-    $user = "root";
-    $password = "root";
-    $dbname = "zbt-tickets";
+   function get_PDO() {
+     # Variables for connections to the database.
+     $host =  "localhost";
+     $port = "8889"; # Make sure this matches your server (e.g. MAMP) port
+     $user = "root";
+     $password = "root";
+     $dbname = "zbt_tickets";
 
-    # Make a data source string that will be used in creating the PDO object
-    $ds = "mysql:host={$host}:{$port};dbname={$dbname};charset=utf8";
+     # Make a data source string that will be used in creating the PDO object
+     $ds = "mysql:host={$host}:{$port};dbname={$dbname};charset=utf8";
 
-    try {
-      $db = new PDO($ds, $user, $password);
-      $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-      return $db;
-    } catch (PDOException $ex) {
-      cannot_connect_db();
-    }
-  }
+     try {
+       $db = new PDO($ds, $user, $password);
+       $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+       return $db;
+     } catch (PDOException $ex) {
+       cannot_connect_db($ex);
+     }
+   }
+
 
 //-----------------Not taken from Class: ---------------------------------------
 
