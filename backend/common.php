@@ -27,10 +27,10 @@
    */
    function get_PDO() {
      # Variables for connections to the database.
-     $host =  "localhost";
-     $port = "8889"; # Make sure this matches your server (e.g. MAMP) port
-     $user = "root";
-     $password = "root";
+     $host =  "138.68.30.210";
+     $port = "3306"; # Make sure this matches your server (e.g. MAMP) port
+     $user = "manager";
+     $password = "g3t_t!cK37s";
      $dbname = "zbt_tickets";
 
      # Make a data source string that will be used in creating the PDO object

@@ -57,8 +57,16 @@
           j+=6;
           continue;
         }
+        //48-57;10 , 65-90;26, 97-122;26
         //Random character from 48-90 (0-Z)
-        code_string += String.fromCharCode(Math.round(Math.random()*42)+48);
+        let num = Math.round(Math.random()*62);
+        if(num < 10) { //0-9
+          code_string += String.fromCharCode(num + 48);
+        } else if(num > 36) { //a-z
+          code_string += String.fromCharCode(num+60);
+        } else { //A-Z
+          code_string += String.fromCharCode(num+55);
+        }
       }
       output.push(code_string);
     }
