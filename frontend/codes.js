@@ -2,6 +2,7 @@
   "use strict";
 
   window.addEventListener("load", initialize);
+  const URL = "https://afternoon-citadel-95316.herokuapp.com/";
   const PULL_LENGTH = 4; //max length for pull requests.
   const CODE_LENGTH = 16; //Length of codes to be printed. Must be greater than
                                                           //or equal to 6.
@@ -26,7 +27,7 @@
     console.log(count);
     let params = new FormData();
     params.append("pull", count);
-    fetch("../backend/scanner.php", {method: "POST", mode: "cors", body: params})
+    fetch(URL+"/backend/scanner.php", {method: "POST", mode: "cors", body: params})
     .then(checkStatus)
     .then(JSON.parse)
     .then(displayResult)

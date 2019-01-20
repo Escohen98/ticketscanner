@@ -2,6 +2,7 @@
   "use strict";
 
   window.addEventListener("load", initialize);
+    const URL = "https://afternoon-citadel-95316.herokuapp.com/";
   const CODE_LENGTH = 4; //max code length.
   let codes = []; //An array containing codes already used. Only for testing purposes.
 
@@ -26,7 +27,7 @@
     let code = $("code").innerText;
     let params = new FormData();
     params.append("code", code);
-    fetch("../backend/scanner.php", {method: "POST", mode: "cors", body: params})
+    fetch(URL+"/backend/scanner.php", {method: "POST", mode: "cors", body: params})
       .then(checkStatus)
       .then(JSON.parse)
       .then(displayResult)
