@@ -20,7 +20,7 @@
   }
 
   //Checks if code already exists in codes. If false, displays success
-  //otherwise displays error.
+  //otherwise logs error.
   function fetchData() {
     //updateBtnColor();
     let code = $("code").innerText;
@@ -29,7 +29,8 @@
     fetch("../backend/scanner.php", {method: "POST", mode: "cors", body: params})
       .then(checkStatus)
       .then(JSON.parse)
-      .then(displayResult);
+      .then(displayResult)
+      .catch(console.log);
       /*
     //let test = Math.round(Math.random());
     if(code.length == 4) {
@@ -70,7 +71,6 @@
 
     //Adds given number (0-9) to the code string while the length <= CODE_LENGTH
     function addChar() {
-      //updateBtnColor();
       $("success").classList.add("hidden");
       $("error").classList.add("hidden");
       document.body.style.backgroundColor = "white";
@@ -81,7 +81,6 @@
 
     //Removes the last character in the code string from the code.
     function delChar() {
-      updateBtnColor();
       let code = $("code").innerText;
       console.log(`|${code}|`);
       if(code.length != 0) {
