@@ -64,7 +64,7 @@
         $("code").innerText = "";
       }, 1000);
 
-      let audio = new Audio(`./audio/${file}`);
+      let audio = new Audio(`../audio/${file}`);
       audio.play();
       $(element).classList.remove("hidden");
     }
@@ -87,7 +87,6 @@
         $("code").innerText = code.substring(0, code.length-1);
         code = $("code").innerText;
       }
-      console.log(`|${code}|`);
     }
 
   //Adds mousedown and mouseup events to given button to change the color
