@@ -24,15 +24,22 @@
   function fetchData() {
     //updateBtnColor();
     let code = $("code").innerText;
+    let params = new FormData();
+    params.append("code", code);
+    fetch("./scanner.php", {method: "POST", mode: "cors", body: params})
+      .then(checkStatus)
+      .then(JSON.parse)
+      .then(displayResult);
+      /*
     //let test = Math.round(Math.random());
     if(code.length == 4) {
       console.log(codes.includes(code));
-      if(/*test==0 &&*/ !codes.includes(code) /*Testing Frontend only*/) {
+      if(/*test==0 && !codes.includes(code) /*Testing Frontend only) {
         displayResult(true);
       } else {
         displayResult(false);
       }
-    }
+    }*/
   }
 
     // Displays success image for 1/2 a second and plays a success sound
@@ -40,10 +47,11 @@
     // active and exists in database (if result == true) otherwise displays
     // error image and plays fail sound.
     function displayResult(result) {
+      console.log(result);
       let element = "error";
       let file = "bad-beep.wav";
       document.body.style.backgroundColor = "red";
-      if(result) {
+      if(result.active) {
         element = "success";
         file = "success.wav";
         document.body.style.backgroundColor = "green";
@@ -113,6 +121,27 @@
       }
     }
   }*/
+
+  /*
+  * Taken from bestreads assignment
+  * Helper function to return the response's result text if successful,
+  * otherwise returns the rejected Promise result with an error status and
+  * corresponding text.
+  * @param {object} response - response to check for success/error
+  * @returns {object} - valid result text if response was successful, otherwise
+  *                     rejected Promise result
+  */
+  function checkStatus(response) {
+   const OK = 200;
+   const ERROR = 300;
+   let responseText = response.text();
+   if (response.status >= OK && response.status < ERROR
+       || response.status === 0) {
+     return responseText;
+   } else {
+     return responseText.then(Promise.reject.bind(Promise));
+   }
+  }
 
   //Retrieved functions from CSE 154 Template
   //Simplifies importing elements

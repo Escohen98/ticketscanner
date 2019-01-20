@@ -130,7 +130,7 @@
    //                    returns false otherwise.
    function get_exists($db, $code) {
      try {
-       $query = "SELECT code AS {$code} FROM Tickets;";
+       $query = "SELECT code AS '{$code}' FROM Tickets;";
        $result = $db -> query($query);
        $output = array();
        foreach($result as $row) {
