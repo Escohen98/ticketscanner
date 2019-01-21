@@ -20,6 +20,7 @@
   error_reporting(E_ALL);
   ini_set('display_errors', 1);
   header("Content-type: application/json");
+  header("Access-Control-Allow-Origin: *");
   /**
    * Returns a PDO object connected to the bmstore database. Throws
    * a PDOException if an error occurs when connecting to database.

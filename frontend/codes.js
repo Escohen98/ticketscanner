@@ -132,7 +132,7 @@
     return document.querySelector(query);
   }
 
-  // Function to download data to a file
+/*  // Function to download data to a file
 function download(data, filename, type) {
     var file = new Blob([data], {type: type});
     if (window.navigator.msSaveOrOpenBlob) // IE10+
@@ -149,6 +149,6 @@ function download(data, filename, type) {
             window.URL.revokeObjectURL(url);
         }, 0);
     }
-}
+}*/
 
 })();
