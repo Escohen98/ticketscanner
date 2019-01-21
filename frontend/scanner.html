@@ -9,8 +9,13 @@
     <title>ZBT - Ticket Scanner</title>
   </head>
   <body>
-    <section id="body" class="code-validator">
-        <div class="dcode"><p id="code" class="code"></p></div>
+    <section id="password">
+      <h1>Please enter the password:</h1>
+      <input id="pass-input" type="password"></input>
+      <button class="submit" id="set">Validate Codes</button>
+    </section>
+    <section id="body" class="code-validator hidden">
+        <div class="dcode flex"><p id="code" class="code"></p></div>
         <button id="1" class="num">1</button>
         <button id="2" class="num">2</button>
         <button id="3" class="num">3</button>

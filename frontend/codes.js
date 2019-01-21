@@ -17,16 +17,27 @@
     $("x").addEventListener("click", delChar);
 
   //  addColorChange($("enter"));
-    $("enter1").addEventListener("click", fetchData);
+    $("enter1").addEventListener("click", togglePassView);
+    $("get").addEventListener("click", fetchData);
+  }
+
+  //Hides $("input") and unhides $("password")
+  function togglePassView() {
+    $("password").classList.remove("hidden");
+    $("input").classList.add("hidden");
+    $("input").classList.remove("flex");
+    $("dcode").classList.remove("hidden");
   }
 
   //Pulls count ammount of codes from database and sets them to active.
   //Logs error.
   function fetchData() {
+    let pass = $("pass-input").innerText;
     let count = $("code1").innerText;
     console.log(count);
     let params = new FormData();
     params.append("pull", count);
+    params.append("password", pass);
     fetch(URL+"/backend/scanner.php", {method: "POST", mode: "cors", body: params})
     .then(checkStatus)
     .then(JSON.parse)
@@ -42,7 +53,7 @@
       $("output").appendChild(code);
     }
 
-    $("input").classList.add("hidden");
+    $("password").classList.add("hidden");
     $("output").classList.remove("hidden");
   }
 

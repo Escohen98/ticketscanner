@@ -56,6 +56,12 @@ h1, #pass-input, .submit {
   display: none;
 }
 
+.incorrect {
+  border-color: "red";
+  border-style: "solid";
+  border-width: 1;
+}
+
 @media only screen and (max-width: 600px) {
   #output > p {
     font-size: 50px;

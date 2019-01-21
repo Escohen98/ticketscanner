@@ -18,6 +18,30 @@
 
   //  addColorChange($("enter"));
     $("enter").addEventListener("click", fetchData);
+    $("submit").addEventListener("click", fetchPass);
+  }
+
+  //Hides $("password") and unhides $("input")
+  function togglePassView(response) {
+    if(response.correct) {
+      $("password").classList.add("hidden");
+      $("input").classList.remove("hidden");
+      $("input").classList.add("flex");
+      $("dcode").classList.add("hidden");
+    } else {
+      $("pass-input").classList.add("incorrect");
+    }
+  }
+
+  function fetchPass() {
+    let password = $("pass-input").innerText;
+    let params = new FormData();
+    params.push("password", password);
+    fetch(URL+'/backend/scanner.php', {method: "POST", mode: "cors", body: params})
+      .then(checkStatus)
+      .then(JSON.parse)
+      .then(togglePassView)
+      .catch(console.log);
   }
 
   //Checks if code already exists in codes. If false, displays success

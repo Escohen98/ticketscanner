@@ -3,16 +3,19 @@ include("common.php");
 //-----------------Copyright of Eric Cohen -------------------------------------
 if(isset($_POST["code"]) && intval(file_get_contents("./bin/auth.txt")) == 1) {
   echo json_encode(inactivate($_POST["code"]));
-
+  file_put_contents("./bin/auth.txt", "0"); //Resets password validator.
 } else if(isset($_POST["pull"]) && isset($_POST["password"])) {
   if(check_password($_POST["password"])) { //Asks for password 1 time after each pull request.
     echo json_encode(get_codes($_POST["pull"]));
   } else {
-    die("Incorrect password.");
+    echo json_encode(["codes" => "Incorrect password."]);
   }
 } else if(isset($_POST["password"])) { //Asks for password 1 time before accessing scanner.html
   if(check_password($_POST["password"], 1)) {
     file_put_contents("./bin/auth.txt", "1");
+    echo json_encode(["correct" => true]);
+  } else {
+    echo json_encode(["correct" => false]);
   }
 } else {
   $array = array();
@@ -49,15 +52,16 @@ function get_codes($count) {
     $codes = array();
     foreach($output as $c) {
       array_push($codes, $c["code"]);
-      $query2 = "UPDATE tickets set active=1 WHERE code = {$c['code']}";
+      $query2 = "UPDATE tickets SET active=1 WHERE code = {$c['code']}";
       $db -> query($query2);
     }
-    return ["codes" => create_code($codes)];
+    return ["codes" => create_codes($codes)];
   } else {
     handle_error("Invalid number, {$count} ");
   }
 }
 
+//Generates randomized code strings from the response. Returns result in array.
 function create_codes($codes) {
   $CODE_LEMGTH = 16;
   $output = array()
@@ -87,6 +91,7 @@ function create_codes($codes) {
 }
 
 //Checks if entered password is correct.
+//File used so user can't bypass password.
 function check_password($input, $index=0) {
   return file("./bin/password.txt")[$index] == $input;
 }
