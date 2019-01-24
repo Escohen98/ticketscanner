@@ -37,7 +37,7 @@
     let password = $("pass-input").innerText;
     let params = new FormData();
     params.append("password", password);
-    fetch(URL+'/backend/scanner.php', {method: "POST", mode: "cors", body: params})
+    fetch('../backend/scanner.php', {method: "POST", mode: "cors", body: params})
       .then(checkStatus)
       .then(JSON.parse)
       .then(togglePassView)

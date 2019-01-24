@@ -72,8 +72,8 @@ function create_codes($codes) {
     $code_string = "";
     for($j=0; $j<$CODE_LENGTH; $j++) {
       if($j == $index) {
-        $code1 = substr($codes[$i], 2);
-        $code2 = substr($codes[$i], -2);
+        //$code1 = substr($codes[$i], 2);
+        //$code2 = substr($codes[$i], -2);
         $code_string += "x{$code1}x{$code2}x";
         //$code_string += $codes[$i];
         $j+=6;
@@ -82,6 +82,9 @@ function create_codes($codes) {
       //48-57;10 , 65-90;26, 97-122;26
       //Random character from 48-90 (0-Z)
       $num = rand(0, 62);
+      while($num == 18) {
+        $num = rand(0. 62);
+      }
       if($num < 10) { //0-9
         $code_string += chr($num + 48);
       } else if($num > 36) { //a-z
@@ -90,7 +93,7 @@ function create_codes($codes) {
         $code_string += chr($num + 55);
       }
     }
-    array_push($output, [$codes[$i] => $code_string]);
+    array_push($output, $code_string);
   }
   return $output;
 }

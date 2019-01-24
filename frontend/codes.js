@@ -48,9 +48,9 @@
   function displayResult(response) {
     let output = response.codes;
     for(let i = 0; i<output.length; i++) {
-      let code = document.createElement("a");
+      let code = document.createElement("img");
       let qr = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${output[i]}`;
-      code.href = qr;
+      code.src = qr;
       code.setAttribute("download", `Ticket${i+1}`);
       code.innerText = `Ticket ${i+1}`;
       $("output").appendChild(code);
