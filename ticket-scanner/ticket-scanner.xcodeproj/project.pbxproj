@@ -14,6 +14,8 @@
 		49F726B521F918BC002F4F66 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49F726B321F918BC002F4F66 /* LaunchScreen.storyboard */; };
 		49F726C021F918BC002F4F66 /* ticket_scannerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F726BF21F918BC002F4F66 /* ticket_scannerTests.swift */; };
 		49F726CB21F918BC002F4F66 /* ticket_scannerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F726CA21F918BC002F4F66 /* ticket_scannerUITests.swift */; };
+		49F726D921F9403D002F4F66 /* success.wav in Resources */ = {isa = PBXBuildFile; fileRef = 49F726D821F9403D002F4F66 /* success.wav */; };
+		49F726DB21F94047002F4F66 /* bad-beep.wav in Resources */ = {isa = PBXBuildFile; fileRef = 49F726DA21F94047002F4F66 /* bad-beep.wav */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +49,8 @@
 		49F726C621F918BC002F4F66 /* ticket-scannerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ticket-scannerUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		49F726CA21F918BC002F4F66 /* ticket_scannerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ticket_scannerUITests.swift; sourceTree = "<group>"; };
 		49F726CC21F918BC002F4F66 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		49F726D821F9403D002F4F66 /* success.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = success.wav; path = ../../audio/success.wav; sourceTree = "<group>"; };
+		49F726DA21F94047002F4F66 /* bad-beep.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = "bad-beep.wav"; path = "../../audio/bad-beep.wav"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +104,8 @@
 				49F726AA21F918B9002F4F66 /* AppDelegate.swift */,
 				49F726AE21F918B9002F4F66 /* Main.storyboard */,
 				49F726AC21F918B9002F4F66 /* ViewController.swift */,
+				49F726DA21F94047002F4F66 /* bad-beep.wav */,
+				49F726D821F9403D002F4F66 /* success.wav */,
 				49F726B121F918BC002F4F66 /* Assets.xcassets */,
 				49F726B321F918BC002F4F66 /* LaunchScreen.storyboard */,
 				49F726B621F918BC002F4F66 /* Info.plist */,
@@ -229,8 +235,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49F726D921F9403D002F4F66 /* success.wav in Resources */,
 				49F726B521F918BC002F4F66 /* LaunchScreen.storyboard in Resources */,
 				49F726B221F918BC002F4F66 /* Assets.xcassets in Resources */,
+				49F726DB21F94047002F4F66 /* bad-beep.wav in Resources */,
 				49F726B021F918B9002F4F66 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
