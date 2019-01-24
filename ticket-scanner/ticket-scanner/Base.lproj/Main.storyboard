@@ -174,7 +174,7 @@
                                     <action selector="updateCode:" destination="BYZ-38-t0r" eventType="touchUpInside" id="j3l-Ne-VNd"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1234" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GXv-Cm-bPP" userLabel="Code">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GXv-Cm-bPP" userLabel="Code">
                                 <rect key="frame" x="28" y="90" width="318" height="119"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.94283653757115105" green="0.94283653757115105" blue="0.94283653757115105" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
