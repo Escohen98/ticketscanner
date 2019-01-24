@@ -29,7 +29,8 @@ if(isset($_POST["code"]) && intval(file_get_contents("./bin/auth.txt")) == 1) {
 
 //Checks if the givewn $code is active. It is, returns true and deactivates.
 //Otherwise returns false.
-function inactivate($code) {
+function inactivate($code_encode) {
+  $code = decode($code_encode);
   $db = get_PDO();
   $query = "SELECT active FROM tickets WHERE code={$code}";
   $isActive = $db -> query($query);
@@ -72,8 +73,8 @@ function create_codes($codes) {
     $code_string = "";
     for($j=0; $j<$CODE_LENGTH; $j++) {
       if($j == $index) {
-        //$code1 = substr($codes[$i], 2);
-        //$code2 = substr($codes[$i], -2);
+        $code1 = substr($codes[$i], 2);
+        $code2 = substr($codes[$i], -2);
         $code_string += "x{$code1}x{$code2}x";
         //$code_string += $codes[$i];
         $j+=6;
@@ -96,6 +97,12 @@ function create_codes($codes) {
     array_push($output, $code_string);
   }
   return $output;
+}
+
+//Extracts the code from the code string.
+function decode($code) {
+  $index = strpos('x');
+  return substr($code, $index+1, 2).substr($code, $index+4, 2);
 }
 
 //Checks if entered password is correct.

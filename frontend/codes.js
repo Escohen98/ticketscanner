@@ -49,11 +49,18 @@
     let output = response.codes;
     for(let i = 0; i<output.length; i++) {
       let code = document.createElement("img");
-      let qr = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${output[i]}`;
+      let download = document.createElement("a");
+      let qr = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${output[i]}`;
+      code.alt = "code";
       code.src = qr;
       code.setAttribute("download", `Ticket${i+1}`);
       code.innerText = `Ticket ${i+1}`;
       $("output").appendChild(code);
+
+      download.href = qr;
+      download.innerText = "Download";
+      download.setAttribute("download", `Ticket${i+1}`);
+      $("output").appendChild(download);
     }
 
     $("password").classList.add("hidden");
