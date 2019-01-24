@@ -18,7 +18,7 @@
 
   //  addColorChange($("enter"));
     $("enter").addEventListener("click", fetchData);
-    $("submit").addEventListener("click", fetchPass);
+    $("set").addEventListener("click", fetchPass);
   }
 
   //Hides $("password") and unhides $("input")
@@ -36,7 +36,7 @@
   function fetchPass() {
     let password = $("pass-input").innerText;
     let params = new FormData();
-    params.push("password", password);
+    params.append("password", password);
     fetch(URL+'/backend/scanner.php', {method: "POST", mode: "cors", body: params})
       .then(checkStatus)
       .then(JSON.parse)
@@ -113,37 +113,6 @@
         code = $("code").innerText;
       }
     }
-
-  //Adds mousedown and mouseup events to given button to change the color
-  //when pressed.
-/*  function addColorChange(btn) {
-    btn.addEventListener("mousedown", function() {this.style.backgroundColor =
-                                                  "blue";});
-    btn.addEventListener("mouseup", function() {this.style.backgroundColor =
-                                                "#DBDBDB";});
-  }*/
-
-/*  //Changes the color of the element that called on the function to
-  //gray if it's blue, otherwise turns it gray.
-  function changeColor() {
-    if(this.style.backgroundColor == "blue" ) {
-      this.style.backgroundColor = "#DBDBDB";
-    } else {
-      this.style.backgroundColor = "blue";
-    }
-
-  }*/
-
-  /*//Makes sure all buttons are set to default.
-  //Redundant but necessary.
-  function updateBtnColor() {
-    let btns = qsa("button");
-    for(let i = 0; i<btns.lenght; i++) {
-      if(btns[i].style.backgroundColor == "blue" ) {
-        btns[i].style.backgroundColor = "#DBDBDB";
-      }
-    }
-  }*/
 
   /*
   * Taken from bestreads assignment

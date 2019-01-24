@@ -32,12 +32,11 @@
   //Pulls count ammount of codes from database and sets them to active.
   //Logs error.
   function fetchData() {
-    let pass = $("pass-input").innerText;
+    //let pass = $("pass-input").innerText;
     let count = $("code1").innerText;
-    console.log(count);
     let params = new FormData();
     params.append("pull", count);
-    params.append("password", pass);
+  //  params.append("password", pass);
     fetch(URL+"/backend/scanner.php", {method: "POST", mode: "cors", body: params})
     .then(checkStatus)
     .then(JSON.parse)
@@ -45,11 +44,15 @@
     .catch(console.log);
   }
 
+  //Posts codes to page.
   function displayResult(response) {
-    let output = createCodes(response);
+    let output = response.codes;
     for(let i = 0; i<output.length; i++) {
-      let code = document.createElement("p");
-      code.innerText = output[i];
+      let code = document.createElement("a");
+      let qr = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${output[i]}`;
+      code.href = qr;
+      code.setAttribute("download", `Ticket${i+1}`);
+      code.innerText = `Ticket ${i+1}`;
       $("output").appendChild(code);
     }
 
@@ -57,7 +60,7 @@
     $("output").classList.remove("hidden");
   }
 
-  //Generates randomized code strings from the response. Returns result in array.
+  /*//Generates randomized code strings from the response. Returns result in array.
   function createCodes(response) {
     let output = new Array();
     for(let i=0; i<response.codes.length; i++) {
@@ -85,7 +88,7 @@
     console.log("output");
     return output;
 
-  }
+  }*/
 
   //Adds given number (0-9) to the code string while the length <= CODE_LENGTH
   function addChar() {
@@ -99,7 +102,6 @@
   //Removes the last character in the code string from the code.
   function delChar() {
     let code = $("code1").innerText;
-    console.log(`|${code}|`);
     if(code.length != 0) {
       $("code1").innerText = code.substring(0, code.length-1);
       code = $("code1").innerText;
