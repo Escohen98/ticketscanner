@@ -20,7 +20,7 @@
     $("enter1").addEventListener("click", togglePassView);
     $("get").addEventListener("click", fetchData);
   }
-
+  //********************************************//
   //Hides $("input") and unhides $("password")
   function togglePassView() {
     $("password").classList.remove("hidden");
@@ -37,8 +37,9 @@
     let params = new FormData();
     params.append("pull", count);
   //  params.append("password", pass);
-    fetch(URL+"/backend/scanner.php", {method: "POST", mode: "cors", body: params})
+    fetch("/backend/scanner.php", {method: "POST", mode: "cors", body: params})
     .then(checkStatus)
+    .then(console.log)
     .then(JSON.parse)
     .then(displayResult)
     .catch(console.log);
@@ -46,6 +47,7 @@
 
   //Posts codes to page.
   function displayResult(response) {
+    console.log(response);
     let output = response.codes;
     for(let i = 0; i<output.length; i++) {
       let code = document.createElement("img");

@@ -1,6 +1,5 @@
 <?php
 include("common.php");
-include("lib/phpqrcode/qrlip/php");
 //-----------------Copyright of Eric Cohen -------------------------------------
 if(isset($_POST["code"]) && intval(file_get_contents("./bin/auth.txt")) == 1) {
   echo json_encode(inactivate($_POST["code"]));
@@ -47,7 +46,8 @@ function inactivate($code_encode) {
 }
 
 //Pulls $count amount of codes and sets them to active.
-function get_codes($count) {
+function get_codes($countS) {
+  $count = intval($countS);
   $db = get_PDO();
   if($count > 0 && $count <= 10000) {
     $query = "SELECT code FROM tickets WHERE active=0 LIMIT {$count}";
@@ -66,16 +66,18 @@ function get_codes($count) {
 
 //Generates randomized code strings from the response. Returns result in array.
 function create_codes($codes) {
-  $CODE_LEMGTH = 17;
+  $CODE_LENGTH = 17;
   $output = array();
   for($i=0; $i<count($codes); $i++) {
     $index = rand(0, $CODE_LENGTH-7);
     $code_string = "";
     for($j=0; $j<$CODE_LENGTH; $j++) {
       if($j == $index) {
-        $code1 = substr($codes[$i], 2);
-        $code2 = substr($codes[$i], -2);
-        $code_string += "x{$code1}x{$code2}x";
+        $code = $codes[$i];
+        $code1 = substr($code, 0, 2);
+        $code2 = substr($code, 2, 4);
+        print($code);
+        $code_string .= "x{$code1}x{$code2}x";
         //$code_string += $codes[$i];
         $j+=6;
         continue;
@@ -84,14 +86,14 @@ function create_codes($codes) {
       //Random character from 48-90 (0-Z)
       $num = rand(0, 62);
       while($num == 18) {
-        $num = rand(0. 62);
+        $num = rand(0, 62);
       }
       if($num < 10) { //0-9
-        $code_string += chr($num + 48);
+        $code_string .= chr($num + 48);
       } else if($num > 36) { //a-z
-        $code_string += chr($num + 60);
+        $code_string .= chr($num + 60);
       } else { //A-Z
-        $code_string += chr($num + 55);
+        $code_string .= chr($num + 55);
       }
     }
     array_push($output, $code_string);
