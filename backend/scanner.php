@@ -11,11 +11,11 @@ if(isset($_POST["code"]) && intval(file_get_contents("./bin/auth.txt")) == 1) {
     echo json_encode(["codes" => "Incorrect password."]);
   }
 } else if(isset($_POST["password"])) { //Asks for password 1 time before accessing scanner.html
-  if(check_password($_POST["password"], 0) == "a") {
+  if(check_password($_POST["password"], 0)) {
     file_put_contents("./bin/auth.txt", "1");
     echo json_encode(["correct" => true]);
   } else {
-    echo json_encode(["correct" => check_password($_POST["password"], 1)]);
+    echo json_encode(["correct" => check_password($_POST["password"], 0)]);
   }
 } else {
   $array = array();
@@ -110,6 +110,9 @@ function decode($code) {
 //Checks if entered password is correct.
 //File used so user can't bypass password.
 function check_password($input, $index=1) {
+  if($index == 0) {
+    return substr(file("./bin/passwords.txt")[$index], 0, 11) == $input;
+  }
   return file("./bin/passwords.txt")[$index] == $input;
 }
 
